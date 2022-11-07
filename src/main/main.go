@@ -1,20 +1,17 @@
 package main
 
 import (
-	"fmt"
-	"rsc.io/pdf"
+	"github.com/gin-gonic/gin"
 )
 
 func main() {
-	fmt.Println("start analysis pdf....")
-	file, err := pdf.Open("./src/main/2022.pdf")
-	if err != nil {
-		panic(err)
-	}
-	content := file.Page(2).Content()
-	text := content.Text
-	for _,v := range text {
-		fmt.Print(v.S)
-	}
+	router := gin.Default()
+	router.GET("/ping", func(c *gin.Context) {
+		c.JSON(200, gin.H{
+			"message": "pong",
+		})
+	})
+
+	router.Run()
 }
 
